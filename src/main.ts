@@ -6,7 +6,7 @@ import App from './App.vue'
 import '@unocss/reset/tailwind.css'
 import './styles/main.css'
 import 'uno.css'
-import 'highlight.js/styles/default.css' // 可选，导入样式文件
+import 'highlight.js/styles/default.css'
 
 const app = createApp(App)
 const router = createRouter({
