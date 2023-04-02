@@ -1,4 +1,14 @@
+interface Question {
+  role: 'user'
+  content: string
+}
+
+interface Answer {
+  role: 'assistant'
+  content: string
+}
+
 export interface Chat {
-  question: string
-  answer?: any
+  question: Question
+  answer: Answer
 }

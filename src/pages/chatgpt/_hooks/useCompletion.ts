@@ -1,11 +1,14 @@
-export function useCompletion(openai: any) {
-  async function completionAPI(question: string) {
-    const completion = await openai.createChatCompletion({
-      model: 'gpt-3.5-turbo',
-      messages: [{ role: 'user', content: question }],
+export function useCompletion(instance: any) {
+  async function completionAPI(chatContext: any[]) {
+    return instance({
+      method: 'post',
+      url: '/completions',
+      data: {
+        model: 'gpt-3.5-turbo',
+        messages: chatContext,
+        stream: false,
+      },
     })
-    const ans = completion.data.choices[0].message
-    return ans
   }
 
   return {

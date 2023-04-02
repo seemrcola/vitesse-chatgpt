@@ -10,14 +10,22 @@ const question = ref('')
 const chatList = ref<Chat[]>([])
 
 function send() {
-  let chat: Chat = { question: question.value, answer: '......' }
+  let chat: Chat = {
+    question: { role: 'user', content: question.value },
+    answer: { role: 'assistant', content: '' },
+  }
   chatList.value.push(chat)
-  completionAPI(question.value)
-    .then(({ content }) => {
-      chat = { ...chat, answer: content }
+
+  const chatContext: any[] = []
+  chatList.value.forEach(item => chatContext.push(item.question, item.answer))
+  completionAPI(chatContext)
+    .then((response) => {
+      const answer = response.data.choices[0].message
+      chat = { ...chat, answer }
       chatList.value.pop()
       chatList.value.push(chat)
     })
+
   question.value = ''
 }
 </script>
@@ -27,8 +35,8 @@ function send() {
     <!-- 对话框 -->
     <div h="90%" max-h="90%" overflow-y-scroll b-b="1px solid #999">
       <div v-for="({ question, answer }, index) of chatList" :key="index">
-        <Question :question="question" />
-        <Answer :answer="answer" />
+        <Question :question="question.content" />
+        <Answer :answer="answer.content" />
       </div>
     </div>
     <!-- 输入框 -->

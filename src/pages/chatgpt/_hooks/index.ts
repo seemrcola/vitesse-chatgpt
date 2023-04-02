@@ -1,14 +1,16 @@
-import { Configuration, OpenAIApi } from 'openai'
+import axios from 'axios'
 import { API_KEY } from '../config'
 import { useCompletion } from './useCompletion'
 
-const configuration = new Configuration({
-  apiKey: API_KEY,
+const instance = axios.create({
+  baseURL: 'https://api.openai.com/v1/chat',
+  headers: {
+    Authorization: `Bearer ${API_KEY}`,
+  },
 })
-const openai = new OpenAIApi(configuration)
 
 export function useOpenAI() {
-  const { completionAPI } = useCompletion(openai)
+  const { completionAPI } = useCompletion(instance)
 
   return {
     completionAPI,
