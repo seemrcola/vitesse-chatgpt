@@ -21,9 +21,11 @@ const text = computed(() => {
 <template>
   <main
     flex
-    text-left w-full flex-row-reverse
+    text-left w-full
   >
-    <div i-tabler:brand-openai w-8 h-8 />
+    <div w-8 h-8>
+      <div i-tabler:brand-openai text-xl />
+    </div>
     <p
       flex-1
       bg="#eee" rounded-2 color="#000" text="0.9rem"

@@ -33,8 +33,8 @@ function send() {
 <template>
   <div h-full>
     <!-- 对话框 -->
-    <div h="90%" max-h="90%" overflow-y-scroll b-b="1px solid #999" flex>
-      <div flex-1 px-4>
+    <div h="90%" b-b="1px solid #999" flex>
+      <div flex-1 px-4 h="100%" max-h="100%" overflow-y-scroll>
         <div v-for="({ question, answer }, index) of chatList" :key="index">
           <Question :question="question.content" my-4 />
           <Answer :answer="answer.content" my-4 />
