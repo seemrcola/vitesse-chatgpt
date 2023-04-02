@@ -25,6 +25,7 @@ const text = computed(() => {
   >
     <div i-tabler:brand-openai w-8 h-8 />
     <p
+      flex-1
       bg="#eee" rounded-2 color="#000" text="0.9rem"
       px-4 py-2 mx-2
       class="markdown-body" v-html="text"
