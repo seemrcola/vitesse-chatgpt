@@ -4,11 +4,12 @@
 
 <template>
   <div
-    bg="#999" m-2 rounded-2 px-2 py-3
-    flex justify-left items-center
+    px-2
+    b-b="1px solid #999"
+    flex items-center
     cursor-pointer
-    w-full truncate
+    w-full h-12 truncate
   >
-    chat about javascript closure
+    chat about javascript closure balabala
   </div>
 </template>

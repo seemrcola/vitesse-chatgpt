@@ -8,18 +8,11 @@ const mdi = MarkdownIt({
     const validLang = !!(language && hljs.getLanguage(language))
     if (validLang) {
       const lang = language ?? ''
-      return highlightBlock(
-        hljs.highlight(code, { language: lang }).value, lang,
-      )
+      return hljs.highlight(code, { language: lang }).value
     }
-    return highlightBlock(hljs.highlightAuto(code).value, '')
+    return hljs.highlightAuto(code).value
   },
 })
-function highlightBlock(str: string, lang?: string) {
-  return `
-    <code class="hljs code-block-body ${lang}">${str}</code>
-    `
-}
 const text = computed(() => {
   return mdi.render(props.answer)
 })
@@ -27,13 +20,32 @@ const text = computed(() => {
 
 <template>
   <main
-    text-left w="95%" px-4 py-2 my-4
-    bg="#eee" rounded-2 color="#000" text="0.9rem"
+    flex
+    text-left w-full flex-row-reverse
   >
-    <p class="markdown-body" v-html="text" />
+    <div i-tabler:brand-openai w-8 h-8 />
+    <p
+      bg="#eee" rounded-2 color="#000" text="0.9rem"
+      px-4 py-2 mx-2
+      class="markdown-body" v-html="text"
+    />
   </main>
 </template>
 
 <style lang="scss">
-// 样式还没细调整
+.markdown-body {
+  code ,pre {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  pre {
+    background-color: #fff;
+    padding: 8px;
+    border-radius: 8px;
+  }
+  code {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+}
 </style>

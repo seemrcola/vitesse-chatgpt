@@ -31,26 +31,29 @@ function send() {
 </script>
 
 <template>
-  <div h-full p-4>
+  <div h-full>
     <!-- 对话框 -->
-    <div h="90%" max-h="90%" overflow-y-scroll b-b="1px solid #999">
-      <div v-for="({ question, answer }, index) of chatList" :key="index">
-        <Question :question="question.content" />
-        <Answer :answer="answer.content" />
+    <div h="90%" max-h="90%" overflow-y-scroll b-b="1px solid #999" flex>
+      <div flex-1 px-4>
+        <div v-for="({ question, answer }, index) of chatList" :key="index">
+          <Question :question="question.content" my-4 />
+          <Answer :answer="answer.content" my-4 />
+        </div>
       </div>
+      <div bg="#eee" w="200px" />
     </div>
     <!-- 输入框 -->
     <div h="10%" flex items-center relative>
       <TheInput
         v-model="question"
-        w="95%"
+        w-full mx-2
         px-10
         placeholder="What's your question?"
         autocomplete="false"
       />
       <div
         ml-2 h-8 w-8 color="#999" cursor-pointer
-        absolute right-16
+        absolute right-6
         i-ph:paper-plane-right
         @click="send"
       />
