@@ -17,9 +17,9 @@ function delHandleLeave() {
     h-full w-full b-r="1px solid #999"
     overflow-hidden
   >
-    <div h="90%" h-max="90%" overflow-y-scroll bg="#eee" />
+    <div h="90%" h-max="90%" overflow-y-scroll />
     <div
-      w-full h="10%" bg="#fff" b-t="1px solid #999"
+      w-full h="10%" b-t="1px solid #999"
       flex justify-center items-center
     >
       <div text-xl mx-2 cursor-pointer i-material-symbols:create-new-folder-outline />
@@ -32,3 +32,9 @@ function delHandleLeave() {
     </div>
   </div>
 </template>
+
+<style scoped>
+::-webkit-scrollbar {
+  display: none; /* Chrome Safari */
+}
+</style>

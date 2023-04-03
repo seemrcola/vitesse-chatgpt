@@ -43,7 +43,7 @@ function send() {
           <Answer :answer="answer.content" my-4 />
         </div>
       </div>
-      <div bg="#eee" w="200px" />
+      <div b-l="1px solid #999" w="200px" />
     </div>
     <!-- 输入框 -->
     <div h="10%" flex items-center relative>
