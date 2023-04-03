@@ -1,9 +1,8 @@
 <script setup lang='ts'>
-import { useOpenAI } from '../_hooks/index'
 import type { Chat } from '../types'
 import Question from '../_components/question.vue'
 import Answer from '../_components/answer.vue'
-import TheInput from '~/components/TheInput.vue'
+import { useOpenAI } from '~/api/gpt/index'
 
 const { completionAPI } = useOpenAI()
 const question = ref('')
@@ -19,7 +18,7 @@ function send() {
   const chatContext: any[] = []
   chatList.value.forEach(item => chatContext.push(item.question, item.answer))
   completionAPI(chatContext)
-    .then((response) => {
+    .then((response: any) => {
       const answer = response.data.choices[0].message
       chat = { ...chat, answer }
       chatList.value.pop()
@@ -44,7 +43,7 @@ function send() {
     </div>
     <!-- 输入框 -->
     <div h="10%" flex items-center relative>
-      <TheInput
+      <TheTextarea
         v-model="question"
         w-full mx-2
         px-10
