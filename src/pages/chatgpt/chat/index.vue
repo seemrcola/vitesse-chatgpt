@@ -1,6 +1,7 @@
 <script setup lang='ts'>
 import Question from '../_components/question.vue'
 import Answer from '../_components/answer.vue'
+import Tool from '../_components/tool.vue'
 import type { Chat } from '~/types/gpt'
 import { useOpenAI } from '~/api/gpt/index'
 import { useContext } from '~/store/modules/index'
@@ -36,14 +37,19 @@ function send() {
 <template>
   <div h-full>
     <!-- 对话框 -->
-    <div h="90%" b-b="1px solid #999" flex class="chat-box">
-      <div flex-1 px-4 h="100%" max-h="100%" overflow-y-scroll>
+    <div h="90%" b-b="1px solid #999" flex>
+      <div
+        h="100%" max-h="100%" overflow-y-scroll
+        class="chat-box" flex-1 px-4
+      >
         <div v-for="({ question, answer }, index) of contextStore.chatContext" :key="index">
           <Question :question="question.content" my-4 />
           <Answer :answer="answer.content" my-4 />
         </div>
       </div>
-      <div b-l="1px solid #999" w="200px" />
+      <div b-l="1px solid #999" w="200px">
+        <Tool b-b="1px solid #999" />
+      </div>
     </div>
     <!-- 输入框 -->
     <div h="10%" flex items-center relative>
