@@ -1,28 +1,32 @@
 <script setup lang='ts'>
-import type { Chat } from '../types'
 import Question from '../_components/question.vue'
 import Answer from '../_components/answer.vue'
+import type { Chat } from '~/types/gpt'
 import { useOpenAI } from '~/api/gpt/index'
+import { useContext } from '~/store/modules/index'
 
 const { completionAPI } = useOpenAI()
+const contextStore = useContext()
+
 const question = ref('')
-const chatList = ref<Chat[]>([])
 
 function send() {
   let chat: Chat = {
     question: { role: 'user', content: question.value },
     answer: { role: 'assistant', content: '' },
   }
-  chatList.value.push(chat)
+  contextStore.chatContext.push(chat)
 
   const chatContext: any[] = []
-  chatList.value.forEach(item => chatContext.push(item.question, item.answer))
+  contextStore.chatContext.forEach(
+    item => chatContext.push(item.question, item.answer),
+  )
   completionAPI(chatContext)
     .then((response: any) => {
       const answer = response.data.choices[0].message
       chat = { ...chat, answer }
-      chatList.value.pop()
-      chatList.value.push(chat)
+      contextStore.chatContext.pop()
+      contextStore.chatContext.push(chat)
     })
 
   question.value = ''
@@ -32,9 +36,9 @@ function send() {
 <template>
   <div h-full>
     <!-- 对话框 -->
-    <div h="90%" b-b="1px solid #999" flex>
+    <div h="90%" b-b="1px solid #999" flex class="chat-box">
       <div flex-1 px-4 h="100%" max-h="100%" overflow-y-scroll>
-        <div v-for="({ question, answer }, index) of chatList" :key="index">
+        <div v-for="({ question, answer }, index) of contextStore.chatContext" :key="index">
           <Question :question="question.content" my-4 />
           <Answer :answer="answer.content" my-4 />
         </div>
@@ -60,8 +64,11 @@ function send() {
   </div>
 </template>
 
-<style>
+<style scoped>
 ::-webkit-scrollbar {
   display: none; /* Chrome Safari */
+}
+.chat-box {
+  transition: all .3s;
 }
 </style>
