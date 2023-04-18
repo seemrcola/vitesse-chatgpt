@@ -16,7 +16,7 @@ function save() {
   for (const i of chatContext) {
     if (!i)
       break
-    md += `${i.question.content}\n`
+    md += `**${i.question.content}**\n`
     md += `${i.answer.content}\n`
   }
   generateMd(md)
