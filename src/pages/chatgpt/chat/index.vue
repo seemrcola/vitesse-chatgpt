@@ -1,7 +1,7 @@
 <script setup lang='ts'>
-import Question from '../_components/question.vue'
-import Answer from '../_components/answer.vue'
-import Tool from '../_components/tool.vue'
+import Question from './question.vue'
+import Answer from './answer.vue'
+import Tool from './tool.vue'
 import type { Chat } from '~/types/gpt'
 import { useOpenAI } from '~/api/gpt/index'
 import { useContext } from '~/store/modules/index'
