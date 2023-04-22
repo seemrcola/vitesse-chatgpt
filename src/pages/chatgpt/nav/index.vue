@@ -1,5 +1,13 @@
 <script setup lang='ts'>
+import { useOpenAI } from '~/api/gpt/index'
 
+const { completionsAPI } = useOpenAI()
+function getCompletions() {
+  completionsAPI()
+    .then((res) => { console.log(res) })
+    .catch((err) => { console.log(err) })
+}
+getCompletions()
 </script>
 
 <template>
