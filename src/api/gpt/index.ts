@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useCompletion } from './useCompletion'
 
 const SK = 'sk'
-const API_KEY = `${SK}-4opP1oGq9Cr34CjvUB5TT3BlbkFJY3w5hLoAqhbQZELwYAaB`
+const API_KEY = `${SK}-JtLyIqujSrrnrQ9iTWOxT3BlbkFJyaFsUBlFuLykwv66vvHq`
 
 const instance = axios.create({
   baseURL: 'https://api.openai.com/v1',
